@@ -30,7 +30,6 @@ export class Home extends Component{
         const dateFrom1stInput = new Date(date1);
         const dateFrom2stInput = new Date(date2);
         console.log((dateFrom2stInput-dateFrom1stInput)/ (1000 * 3600 * 24));
-
     }
 
     render = () => {
