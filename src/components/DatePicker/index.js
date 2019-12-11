@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
+export class DatePicker extends Component {
+  handleChange = e => {
+    this.props.change(e);
+  };
 
-export class DatePicker extends Component{
-    
-    handleChange = (e) =>
-    {
-        this.props.change(e.target.value);
-    }
-
-    render = () => {
-        return (<input type="date" name="date" className="space" onChange={this.handleChange} />);
-    }
-
+  render = () => {
+    return (
+      <input
+        type="date"
+        name={this.props.name}
+        className="space"
+        onChange={this.handleChange}
+        value={this.props.val}
+      />
+    );
+  };
 }
