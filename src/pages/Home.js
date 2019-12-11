@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Layout } from "./layout";
 import { DatePicker } from "../components/DatePicker";
-import { Error } from '../components/Error';
+import { Error } from "../components/Error";
 export class Home extends Component {
   constructor(props) {
     super(props);
+    //  APP state
     this.state = {
       start: 0,
       end: 0,
@@ -12,55 +13,82 @@ export class Home extends Component {
       result: null
     };
   }
+  // Handle datepicker change
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
- 
-
+  // given to dates, this function returns the difference in days
   calculateDifference = (date1, date2) => {
     this.setState({
-        result: Math.abs((date1-date2)/ (1000 * 3600 * 24))
-    }) 
-  }
-
+      result: Math.abs((date1 - date2) / (1000 * 3600 * 24))
+    });
+  };
+  // Handleclick on calculate button
   handleClick = () => {
+    // get start and end dates from states
     const { start, end } = this.state;
     const dateFrom1stInput = new Date(start);
     const dateFrom2stInput = new Date(end);
-    if(dateFrom1stInput.toString() === "Invalid Date" ||
-      dateFrom2stInput.toString() === "Invalid Date") 
-       this.setState({
+    // check in dates are invalid
+    if (
+      dateFrom1stInput.toString() === "Invalid Date" ||
+      dateFrom2stInput.toString() === "Invalid Date"
+    )
+      this.setState({
         start: 0,
         end: 0,
-        error: 'You have supplied invalid dates',
+        error: "You have supplied invalid dates",
         result: null
-      }) 
-      else{
-          this.setState({
-        error: ''
       });
-      this.calculateDifference(dateFrom1stInput,dateFrom2stInput);
-      } 
-
+    else {
+      // remove error if there was one
+      this.setState({
+        error: ""
+      });
+      // caclulate the difference with the typed dates
+      this.calculateDifference(dateFrom1stInput, dateFrom2stInput);
+    }
   };
-
+  // render function
   render = () => {
     return (
       <Layout>
-          {
-            this.state.error && <Error message={this.state.error}/>
-          }
-        <DatePicker change={this.handleChange} name="start" val={this.state.start} /> <br />
-        <DatePicker change={this.handleChange} name="end" val={this.state.end}/> <br />
+       
+        {
+          //display error if there is one
+        this.state.error && <Error message={this.state.error} />
+        }
+        {
+        // start date datepicker
+        }
+        <DatePicker
+          change={this.handleChange}
+          name="start"
+          val={this.state.start}
+        />{" "}
+        <br />
+        {
+          // end date datepicker
+        }
+        <DatePicker
+          change={this.handleChange}
+          name="end"
+          val={this.state.end}
+        />{" "}
+        <br />
+        {
+          //button the triggers the calculus
+        }
         <button className="space" onClick={this.handleClick}>
           Calculate
         </button>
         <br />
-          {
-            this.state.result && <span> {this.state.result} </span>
-          }
+        {
+          //display the calculus result
+        this.state.result && <span> {this.state.result} </span>
+        }
       </Layout>
     );
   };

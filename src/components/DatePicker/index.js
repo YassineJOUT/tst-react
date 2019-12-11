@@ -7,6 +7,7 @@ export class DatePicker extends Component {
 
   render = () => {
     return (
+        // date picker input 
       <input
         type="date"
         name={this.props.name}
