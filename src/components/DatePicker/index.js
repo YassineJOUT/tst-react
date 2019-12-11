@@ -8,6 +8,11 @@ export class DatePicker extends Component {
   render = () => {
     return (
         // date picker input 
+        <div>
+          <label>
+            {this.props.name} date
+            </label>
+       
       <input
         type="date"
         name={this.props.name}
@@ -15,6 +20,7 @@ export class DatePicker extends Component {
         onChange={this.handleChange}
         value={this.props.val}
       />
+       </div>
     );
   };
 }

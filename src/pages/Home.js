@@ -34,7 +34,8 @@ export class Home extends Component {
     // check in dates are invalid
     if (
       dateFrom1stInput.toString() === "Invalid Date" ||
-      dateFrom2stInput.toString() === "Invalid Date"
+      dateFrom2stInput.toString() === "Invalid Date" || 
+      start === 0 || end === 0
     )
       this.setState({
         start: 0,
@@ -55,6 +56,9 @@ export class Home extends Component {
   render = () => {
     return (
       <Layout>
+     
+       <h2 className="result"> Nimble Ways technical test</h2>
+
        
         {
           //display error if there is one
@@ -68,7 +72,7 @@ export class Home extends Component {
           name="start"
           val={this.state.start}
         />{" "}
-        <br />
+        
         {
           // end date datepicker
         }
@@ -76,19 +80,20 @@ export class Home extends Component {
           change={this.handleChange}
           name="end"
           val={this.state.end}
-        />{" "}
-        <br />
+        />
+       
         {
           //button the triggers the calculus
         }
-        <button className="space" onClick={this.handleClick}>
-          Calculate
-        </button>
+        <input type="submit" onClick={this.handleClick}  value="Submit"/>
+          
+        
         <br />
         {
           //display the calculus result
-        this.state.result && <span> {this.state.result} </span>
+        this.state.result && <div className="result">Result:  {this.state.result}  days</div>
         }
+      
       </Layout>
     );
   };
